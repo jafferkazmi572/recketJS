@@ -1,3 +1,8 @@
+/**
+ * @license
+ * Apache-2.0
+ * Copyright (c) 2025 jafferkazmi572
+ */
 import { IncomingMessage } from "http";
 import WebSocket from "ws";
 import RecketSocket from "./socket";

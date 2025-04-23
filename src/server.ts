@@ -1,3 +1,8 @@
+/**
+ * @license
+ * Apache-2.0
+ * Copyright (c) 2025 jafferkazmi572
+ */
 import { WebSocketServer } from "ws";
 import http from "http";
 import RecketSocket  from "./socket";
