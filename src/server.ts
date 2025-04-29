@@ -17,17 +17,27 @@ class RecketServer {
     private rooms: Map<string, Set<RecketSocket>> = new Map();
     private connectionMiddlewares: Array<(socket: RecketSocket, next: (err?: Error) => void) => void> = [];
     private namespaces: Map<string, RecketNamespace> = new Map();
+    private allowedPath?: string;
 
-    constructor(options: { port?: number; server?: http.Server }) {
+    constructor(options: { port?: number; server?: http.Server, path?:string }) {
         if (options.server && options.port) {
             console.warn("Both port and server provided. Using the existing server.");
         }
+        if(options.path && options.path!== '/'){
+            this.allowedPath = options.path
+        }
         if (options.server) {
-            this.server = new WebSocketServer({ server: options.server });
+            this.server = new WebSocketServer({ noServer: true });
             options.server.on("upgrade", (req, socket, head) => {
                 const parsedUrl = new URL(req?.url!, `http://${req?.headers?.host}`);
                 const fullPath = parsedUrl?.pathname && parsedUrl?.pathname !== '/'? parsedUrl?.pathname : "/recket";
-                const path = fullPath.split("/")[1]; 
+                const path = fullPath.split("/")[1];
+                const normalizedAllowedPath = this.allowedPath?.replace(/^\//, '');
+                if(this.allowedPath && normalizedAllowedPath !== path) {
+                    socket.write('HTTP/1.1 400 Bad Request\r\n\r\n');
+                    socket.destroy();
+                    return;
+                }
                 const pathNamespace =fullPath.split("/")[2]
                 const query: Record<string, string> = {};
                 parsedUrl.searchParams.forEach((value, key) => {
@@ -73,7 +83,12 @@ class RecketServer {
                 
                 const parsedUrl = new URL(req?.url!, `http://${req?.headers?.host}`);
                 const fullPath = parsedUrl?.pathname && parsedUrl?.pathname !== '/'? parsedUrl?.pathname : "/recket";
-                const path = fullPath.split("/")[1]; 
+                const path = fullPath.split("/")[1];
+                const normalizedAllowedPath = this.allowedPath?.replace(/^\//, '');
+                if(this.allowedPath && normalizedAllowedPath !== path) {
+                    ws.close(1008, "Invalid path");
+                    return;
+                }
                 const pathNamespace =fullPath.split("/")[2]
                 const query: Record<string, string> = {};
                 parsedUrl.searchParams.forEach((value, key) => {
