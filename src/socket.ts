@@ -91,7 +91,7 @@ class RecketSocket {
         this.middlewares.push(middleware);
     }
 
-    registerRequestHandler(endpoint: string, handler: (data: any, respond: (data: any, error?:  { code: number; message: string }) => void) => void) {
+    onRequest(endpoint: string, handler: (data: any, respond: (data: any, error?:  { code: number; message: string }) => void) => void) {
         if (this.requestHandlers.has(endpoint)) {
             throw new Error(`Endpoint "${endpoint}" is already registered.`);
         }

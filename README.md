@@ -48,7 +48,7 @@ chatNamespace.on("connection", (socket) => {
     socket.emit("server_greet", { message: "Hello from server!" });
   });
 
-  socket.registerRequestHandler("get_user", async (data, response) => {
+  socket.onRequest("get_user", async (data, response) => {
     if(data.userId)
       response( { id: data.userId, name: "Ali" });
     else
@@ -94,7 +94,7 @@ chat.use("say_hello", async (socket, data, next) => {
 
  - Below is server declaration
 ```javascript
-socket.registerRequestHandler("get_user", async (data, response) => {
+socket.onRequest("get_user", async (data, response) => {
     if(data.userId)
       response( { id: data.userId, name: "Ali" });
     else
@@ -111,7 +111,7 @@ await socket.request("get_user", { time: Date.now() });
 
 - Below is client declaration
 ```javascript
-socket.registerRequestHandler("ping", async (data, response) => {
+socket.onRequest("ping", async (data, response) => {
    response({ message: 'I am Here...' });
 });
 ```
@@ -170,7 +170,7 @@ namespace.to("room").emit(...);
 socket.id
 socket.emit("event", data);
 socket.on("event", handler);
-socket.registerRequestHandler("endpoint", async (data,respond) => {});
+socket.onRequest("endpoint", async (data,respond) => {});
 socket.request("endpoint", data);
 socket.join("room");
 socket.leave("room");
