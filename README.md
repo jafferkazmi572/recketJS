@@ -45,11 +45,11 @@ This project is licensed under the [Apache License 2.0](./LICENSE) © 2025 [jaff
 
 ### Basic Setup
 ```javascript
-import { RacketServer } from "recketjs";
+import { RecketServer } from "recketjs";
 import http from "http";
 
 const server = http.createServer();
-const io = new RacketServer({server, path: "/recket" });
+const io = new RecketServer({server, path: "/recket" });
 
 const chatNamespace = io.of("/chat");
 
@@ -164,13 +164,13 @@ socket.query.token;
 
 ## 🧰 API Overview
 
-### RacketServer
+### RecketServer
 ```javascript
-let rs = new RacketServer({server:httpServer, path: "/recket" });
+let rs = new RecketServer({server:httpServer, path: "/recket" });
 rs.of("/namespace");
 ```
 
-### RacketNamespace
+### RecketNamespace
 ```javascript
 namespace.useConnection(fn);
 namespace.use("event", fn);
@@ -178,7 +178,7 @@ namespace.on("connection", (socket) => {});
 namespace.to("room").emit(...);
 ```
 
-### RacketSocket
+### RecketSocket
 ```javascript
 socket.id
 socket.emit("event", data);
