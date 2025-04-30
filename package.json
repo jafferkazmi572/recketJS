@@ -1,6 +1,7 @@
 {
   "name": "racketjs",
   "version": "1.0.0-beta",
+  "description": "Powerful event-driven WebSocket server framework with structured namespaces, event middleware, and HTTP-style communication.",
   "main": "dist/server.js",  
   "types": "dist/server.d.ts",
   "author": "Jaffer Kazmi (@jafferkazmi572)",

@@ -8,6 +8,9 @@
 - 🏠 Room-based broadcasting  
 - 🔒 Server-to-client and client-to-server secure request support
 
+> Event-driven WebSockets with built-in request-response and no compromise
+
+
 ---
 
 ## 📦 Installation
