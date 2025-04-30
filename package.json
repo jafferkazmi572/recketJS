@@ -1,15 +1,18 @@
 {
   "name": "racketjs",
-  "version": "1.0.0-beta",
+  "version": "0.1.0-beta",
   "description": "Powerful event-driven WebSocket server framework with structured namespaces, event middleware, and HTTP-style communication.",
   "main": "dist/server.js",  
   "types": "dist/server.d.ts",
   "author": "Jaffer Kazmi (@jafferkazmi572)",
   "license": "Apache-2.0",
-  "homepage": "https://github.com/jafferkazmi572/recketjs",
+  "homepage": "https://github.com/jafferkazmi572/recketjs#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jafferkazmi572/recketjs.git"
+    "url": "https://github.com/jafferkazmi572/recketjs"
+  },
+  "bugs": {
+    "url": "https://github.com/jafferkazmi572/recketjs/issues"
   },
   "keywords": ["websocket", "socket.io alternative", "recket", "request-response", "typescript"],
   "files": [
